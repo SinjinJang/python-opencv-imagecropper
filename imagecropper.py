@@ -35,6 +35,7 @@ while True:
     k = cv2.waitKey(0) & 0xFF
     if k == 27:         # wait for ESC key to exit
         cv2.destroyAllWindows()
+        exit()
     elif k == ord('s'): # wait for 's' key to save
         if img_cropped is not None:
             now = datetime.datetime.now()
