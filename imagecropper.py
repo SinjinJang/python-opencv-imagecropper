@@ -12,12 +12,10 @@ img_cropped = None
 def drag_and_crop(event, x, y, flags, param):
     global x0, x1, y0, y1, img, img_cropped
     if event == cv2.EVENT_LBUTTONDOWN:
-        x0 = x
-        y0 = y
+        x0, y0 = x, y
     elif event == cv2.EVENT_LBUTTONUP:
-        x1 = x
-        y1 = y
-        
+        x1, y1 = x, y
+
         if x0 == x1 and y0 == y1:
             x0, x1, y0, y1 = 0, 0, 0, 0
             return
