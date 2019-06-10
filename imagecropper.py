@@ -17,6 +17,10 @@ def drag_and_crop(event, x, y, flags, param):
     elif event == cv2.EVENT_LBUTTONUP:
         x1 = x
         y1 = y
+        
+        if x0 == x1 and y0 == y1:
+            x0, x1, y0, y1 = 0, 0, 0, 0
+            return
 
         len = max(x1 - x0, y1 - y0)
         img_cropped = img[y0:y0+len, x0:x0+len]
