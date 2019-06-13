@@ -28,7 +28,7 @@ def save_box(img, p0, p1, dir_save):
     y1 = max(p0[1], p1[1])
 
     img_boxed = img[y0:y1, x0:x1]
-    cv2.imwrite(dir_save + '/' + filename + '.png', img_boxed)
+    cv2.imwrite(os.path.join(dir_save, filename + '.png'), img_boxed)
 
     print('saved image x0:{0}, y0:{1}, x1:{2}, y1:{3}'.format(x0, y0, x1, y1))
 
