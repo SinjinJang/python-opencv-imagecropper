@@ -47,7 +47,7 @@ def select_box(event, x, y, flags, param):
 
 
 def main():
-    global img
+    global img, p0, p1
 
     img = cv2.imread('./test.jpg', cv2.IMREAD_COLOR)
     cv2.imshow('image', img)
@@ -62,6 +62,8 @@ def main():
             # wait for 's' key to save
             if p0 is not None and p1 is not None:
                 save_box(img, p0, p1)
+                cv2.imshow('image', img)
+                p0 = p1 = None
 
     cv2.destroyAllWindows()
 
