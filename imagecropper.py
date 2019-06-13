@@ -30,7 +30,7 @@ def save_box(img, p0, p1):
 
 
 # mouse callback function
-def drag_and_crop(event, x, y, flags, param):
+def select_box(event, x, y, flags, param):
     global p0, p1, img
 
     if event == cv2.EVENT_LBUTTONDOWN:
@@ -51,7 +51,7 @@ def main():
 
     img = cv2.imread('./test.jpg', cv2.IMREAD_COLOR)
     cv2.imshow('image', img)
-    cv2.setMouseCallback('image', drag_and_crop)
+    cv2.setMouseCallback('image', select_box)
 
     while True:
         k = cv2.waitKey(100) & 0xFF
