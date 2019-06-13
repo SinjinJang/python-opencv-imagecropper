@@ -49,6 +49,5 @@ while True:
             
             img_boxed = img[y0:y1, x0:x1]
             cv2.imwrite(filename + '.png', img_boxed)
-            cv2.imshow('image', img)
 
             print('saved image x0:{0}, y0:{1}, x1:{2}, y1:{3}'.format(x0, y0, x1, y1))
