@@ -63,8 +63,8 @@ def do_main(dir_load, dir_save):
 
         while True:
             k = cv2.waitKey(100) & 0xFF
-            if k == 27 or cv2.getWindowProperty('image', cv2.WND_PROP_VISIBLE) < 1:
-                # wait for ESC key to exit the program
+            if k == ord('q') or cv2.getWindowProperty('image', cv2.WND_PROP_VISIBLE) < 1:
+                # wait for 'q' key to exit the program
                 cv2.destroyAllWindows()
                 exit()
             elif k == ord('s'):
