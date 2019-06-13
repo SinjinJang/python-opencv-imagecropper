@@ -53,21 +53,29 @@ def select_box(event, x, y, flags, param):
 def do_main(dir_load, dir_save):
     global img, p0, p1
 
-    img = cv2.imread('./test.jpg', cv2.IMREAD_COLOR)
-    cv2.imshow('image', img)
-    cv2.setMouseCallback('image', select_box)
+    files = [os.path.join(dir_load, file) for file in os.listdir(dir_load)
+             if os.path.isfile(os.path.join(dir_load, file))]
 
-    while True:
-        k = cv2.waitKey(100) & 0xFF
-        if k == 27 or cv2.getWindowProperty('image', cv2.WND_PROP_VISIBLE) < 1:
-            # wait for ESC key to exit
-            break
-        elif k == ord('s'):
-            # wait for 's' key to save
-            if p0 is not None and p1 is not None:
-                save_box(img, p0, p1, dir_save)
-                cv2.imshow('image', img)
-                p0 = p1 = None
+    for file in files:
+        img = cv2.imread(file, cv2.IMREAD_COLOR)
+        cv2.imshow('image', img)
+        cv2.setMouseCallback('image', select_box)
+
+        while True:
+            k = cv2.waitKey(100) & 0xFF
+            if k == 27 or cv2.getWindowProperty('image', cv2.WND_PROP_VISIBLE) < 1:
+                # wait for ESC key to exit the program
+                cv2.destroyAllWindows()
+                exit()
+            elif k == ord('s'):
+                # wait for 's' key to save boxed image
+                if p0 is not None and p1 is not None:
+                    save_box(img, p0, p1, dir_save)
+                    cv2.imshow('image', img)
+                    p0 = p1 = None
+            elif k == ord('n'):
+                # wait for 'n' key to load next image
+                break
 
     cv2.destroyAllWindows()
 
