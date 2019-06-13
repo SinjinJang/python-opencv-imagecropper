@@ -2,36 +2,35 @@ import datetime
 import numpy as np
 import cv2
 
-x0 = -1
-y0 = -1
-x1 = -1
-y1 = -1
-img_cropped = None
+p0 = None
+p1 = None
+
+# draw box which selected by mouse dragging
+def draw_box(img, p0, p1):
+    boxed = img.copy()
+    boxed = cv2.rectangle(boxed, p0, p1, (0, 255, 00), 2)
+    cv2.imshow('image', boxed)
 
 # mouse callback function
 def drag_and_crop(event, x, y, flags, param):
-    global x0, x1, y0, y1, img, img_cropped
+    global p0, p1, img
     if event == cv2.EVENT_LBUTTONDOWN:
-        x0, y0 = x, y
+        p0 = (x, y)
+        p1 = None
     elif event == cv2.EVENT_LBUTTONUP:
-        x1, y1 = x, y
-
-        if x0 == x1 and y0 == y1:
-            x0, x1, y0, y1 = -1, -1, -1, -1
+        if p0 == p1:
+            p0 = p1 = None
             return
+        else:
+            p1 = (x, y)
 
-        len = max(x1 - x0, y1 - y0)
-        img_cropped = img[y0:y0+len, x0:x0+len]
-        cv2.imshow('img_cropped', img_cropped)
-
-        print('org - x0:{0}, y0:{1}, x1:{2}, y1:{3}'.format(x0, y0, x1, y1))
-        print('mod - x0:{0}, y0:{1}, x1:{2}, y1:{3}'.format(x0, y0, x0+len, y0+len))
+    if p0 is not None and p1 is None:
+        draw_box(img, p0, (x, y))
 
 
 img = cv2.imread('./test.jpg', cv2.IMREAD_COLOR)
 cv2.imshow('image', img)
 cv2.setMouseCallback('image', drag_and_crop)
-
 
 while True:
     k = cv2.waitKey(0) & 0xFF
@@ -39,8 +38,17 @@ while True:
         cv2.destroyAllWindows()
         exit()
     elif k == ord('s'): # wait for 's' key to save
-        if img_cropped is not None:
+        if p0 is not None and p1 is not None:
             now = datetime.datetime.now()
             filename = now.strftime('%Y-%m-%d_%H-%M-%S')
-            cv2.imwrite(filename + '.png', img_cropped)
-            cv2.destroyWindow('img_cropped')
+            
+            x0 = min(p0[0], p1[0])
+            y0 = min(p0[1], p1[1])
+            x1 = max(p0[0], p1[0])
+            y1 = max(p0[1], p1[1])
+            
+            img_boxed = img[y0:y1, x0:x1]
+            cv2.imwrite(filename + '.png', img_boxed)
+            cv2.imshow('image', img)
+
+            print('saved image x0:{0}, y0:{1}, x1:{2}, y1:{3}'.format(x0, y0, x1, y1))
