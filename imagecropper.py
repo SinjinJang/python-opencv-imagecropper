@@ -21,7 +21,6 @@ def drag_and_crop(event, x, y, flags, param):
     elif event == cv2.EVENT_LBUTTONUP:
         if p0 == p1:
             p0 = p1 = None
-            return
         else:
             p1 = (x, y)
 
