@@ -14,6 +14,7 @@ def draw_box(img, p0, p1):
     cv2.imshow('image', boxed)
 
 
+# Save the boxed area as an image
 def save_box(img, p0, p1):
     now = datetime.datetime.now()
     filename = now.strftime('%Y-%m-%d_%H-%M-%S')
