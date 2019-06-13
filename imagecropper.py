@@ -9,7 +9,7 @@ p1 = None
 # draw box which selected by mouse dragging
 def draw_box(img, p0, p1):
     boxed = img.copy()
-    boxed = cv2.rectangle(boxed, p0, p1, (0, 255, 00), 2)
+    boxed = cv2.rectangle(boxed, p0, p1, (0, 255, 0), 2)
     cv2.imshow('image', boxed)
 
 def save_box(img, p0, p1):
@@ -29,6 +29,7 @@ def save_box(img, p0, p1):
 # mouse callback function
 def drag_and_crop(event, x, y, flags, param):
     global p0, p1, img
+
     if event == cv2.EVENT_LBUTTONDOWN:
         p0 = (x, y)
         p1 = None
