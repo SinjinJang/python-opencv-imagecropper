@@ -6,11 +6,13 @@ img = None
 p0 = None
 p1 = None
 
+
 # draw box which selected by mouse dragging
 def draw_box(img, p0, p1):
     boxed = img.copy()
     boxed = cv2.rectangle(boxed, p0, p1, (0, 255, 0), 2)
     cv2.imshow('image', boxed)
+
 
 def save_box(img, p0, p1):
     now = datetime.datetime.now()
@@ -25,6 +27,7 @@ def save_box(img, p0, p1):
     cv2.imwrite(filename + '.png', img_boxed)
 
     print('saved image x0:{0}, y0:{1}, x1:{2}, y1:{3}'.format(x0, y0, x1, y1))
+
 
 # mouse callback function
 def drag_and_crop(event, x, y, flags, param):
@@ -42,6 +45,7 @@ def drag_and_crop(event, x, y, flags, param):
     if p0 is not None and p1 is None:
         draw_box(img, p0, (x, y))
 
+
 def main():
     global img
 
@@ -51,13 +55,14 @@ def main():
 
     while True:
         k = cv2.waitKey(100) & 0xFF
-        if k == 27 or cv2.getWindowProperty('image',cv2.WND_PROP_VISIBLE) < 1:         # wait for ESC key to exit
+        if k == 27 or cv2.getWindowProperty('image', cv2.WND_PROP_VISIBLE) < 1:  # wait for ESC key to exit
            break
-        elif k == ord('s'): # wait for 's' key to save
+        elif k == ord('s'):  # wait for 's' key to save
             if p0 is not None and p1 is not None:
                 save_box(img, p0, p1)
     
     cv2.destroyAllWindows()
+
 
 if __name__ == '__main__':
     main()
