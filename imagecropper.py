@@ -76,7 +76,7 @@ def do_main(dir_in, dir_out):
 
         while True:
             k = cv2.waitKey(100) & 0xFF
-            if k == ord('q') or cv2.getWindowProperty('image', cv2.WND_PROP_VISIBLE) < 1:
+            if k == ord('q') or cv2.getWindowProperty('image', 0) == -1:
                 # wait for 'q' key to exit the program
                 cv2.destroyAllWindows()
                 exit()
