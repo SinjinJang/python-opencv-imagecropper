@@ -4,7 +4,6 @@ import os
 import sys
 
 import cv2
-import numpy as np
 
 img = None
 p0 = None
