@@ -33,7 +33,7 @@ Run the post job
 ----------------
 
 This tool is for making squared/resized images from cropped images.
-$ python postjob.py \
+<pre><code>$ python postjob.py \
   [-i|--input-directory=specify directory to load cropped images] \
   [-o|--output-directory=specify directory to save squared images] \
   [-s|--size=specify the size of one side of squared images for resizing]
