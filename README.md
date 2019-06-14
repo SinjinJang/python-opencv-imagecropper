@@ -18,10 +18,11 @@ $ python imagecropper.py \
 
 How to crop
 -----------
-1. Copy the source image to load directory before running the program. The default is 'load-img' directory.
+1. Copy the source image to load-directory before running the program. The default is 'load-img' directory.
 2. When image is shown, drag mouse where you want to crop.
 3. Press 's' to save the dragged area.
 4. You can do it 2-3 step as much as you can.
 5. Press 'n' to load next image.
 6. You can do it 2-4 step again.
 7. Press 'q' to exit the program.
+8. You can find the images which you cropped in save-directory. The default is 'save-img' directory.
