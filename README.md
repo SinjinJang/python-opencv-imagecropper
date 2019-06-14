@@ -12,8 +12,8 @@ Run the program
 
 <pre><code>$ pip install -r requirements.txt
 $ python imagecropper.py \
-  [-l|--load-directory=specify directory to load images] \
-  [-s|--save-directory=specify directory to save images]
+  [-i|--input-directory=specify directory to load raw images] \
+  [-o|--output-directory=specify directory to save cropped images]
 </code></pre>
 
 How to crop
