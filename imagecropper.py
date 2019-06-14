@@ -1,9 +1,10 @@
 import argparse
 import datetime
-import numpy as np
 import os
 import sys
+
 import cv2
+import numpy as np
 
 img = None
 p0 = None
