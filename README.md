@@ -7,8 +7,8 @@ Description
 This is image cropping tool by mouse dragging action.
 I made this tool to gathering datasets for machine learning.
 
-Run the program
----------------
+Run the image cropper
+---------------------
 
 <pre><code>$ pip install -r requirements.txt
 $ python imagecropper.py \
@@ -28,3 +28,13 @@ How to crop
 1. The program will be finished when it reaches end of images.
 1. Or press 'q' to finish the program.
 1. You can find the images which you cropped in save-directory. The default is 'save-img' directory.
+
+Run the post job
+----------------
+
+This tool is for making squared/resized images from cropped images.
+<pre><code>$ python postjob.py \
+  [-i|--input-directory=specify directory to load cropped images] \
+  [-o|--output-directory=specify directory to save squared images] \
+  [-s|--size=specify the size of one side of squared images for resizing]
+</code></pre>
