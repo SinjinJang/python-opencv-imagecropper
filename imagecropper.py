@@ -60,6 +60,14 @@ def do_main(dir_in, dir_out):
         img = cv2.imread(file, cv2.IMREAD_COLOR)
         if img is None:
             continue
+
+        # Shrink image if the image is too big to display on the screen
+        height = img.shape[0]
+        if height > 1000:
+            ratio = (1000 / height) - 0.1
+            img = cv2.resize(img, dsize=(0, 0), fx=ratio, fy=ratio,
+                             interpolation=cv2.INTER_AREA)
+
         cv2.imshow('image', img)
         cv2.setMouseCallback('image', select_box)
 
