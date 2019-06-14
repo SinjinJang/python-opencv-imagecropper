@@ -75,8 +75,8 @@ def do_main(dir_in, dir_out):
                     save_box(img, p0, p1, dir_out)
                     cv2.imshow('image', img)
                     p0 = p1 = None
-            elif k == ord('n'):
-                # wait for 'n' key to load next image
+            elif k == ord(' '):
+                # wait for ' ' key to load next image
                 break
 
     cv2.destroyAllWindows()

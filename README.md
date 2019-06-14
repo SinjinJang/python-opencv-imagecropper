@@ -23,7 +23,7 @@ How to crop
 1. When image is shown, drag mouse where you want to crop.
 1. Press 's' to save the dragged area.
 1. You can do it 3-4 step as much as you can.
-1. Press 'n' to load next image.
+1. Press space bar to load next image.
 1. You can do it 3-4 step again with new image.
 1. The program will be finished when it reaches end of images.
 1. Or press 'q' to finish the program.
