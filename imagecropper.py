@@ -82,7 +82,7 @@ def do_main(dir_load, dir_save):
 
 if __name__ == '__main__':
     # parsing arguments
-    parser = argparse.ArgumentParser(description='Command line argument description')
+    parser = argparse.ArgumentParser(description='Command line argument')
     parser.add_argument('-l', '--load-directory', type=str,
                         default='load-img', help='specify directory to load images')
     parser.add_argument('-s', '--save-directory', type=str,
