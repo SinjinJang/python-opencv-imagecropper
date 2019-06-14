@@ -58,6 +58,8 @@ def do_main(dir_in, dir_out):
 
     for file in files:
         img = cv2.imread(file, cv2.IMREAD_COLOR)
+
+        # If the file is not image, then continue to next
         if img is None:
             continue
 
@@ -68,6 +70,7 @@ def do_main(dir_in, dir_out):
             img = cv2.resize(img, dsize=(0, 0), fx=ratio, fy=ratio,
                              interpolation=cv2.INTER_AREA)
 
+        # Show image
         cv2.imshow('image', img)
         cv2.setMouseCallback('image', select_box)
 
