@@ -11,24 +11,24 @@ p1 = None
 
 
 # draw box which selected by mouse dragging
-def draw_box(img, p0, p1):
-    boxed = img.copy()
-    boxed = cv2.rectangle(boxed, p0, p1, (0, 255, 0), 2)
+def draw_box(_img, _p0, _p1):
+    boxed = _img.copy()
+    boxed = cv2.rectangle(boxed, _p0, _p1, (0, 255, 0), 2)
     cv2.imshow('image', boxed)
 
 
 # Save the boxed area as an image
-def save_box(img, p0, p1, dir_save):
+def save_box(_img, _p0, _p1, _dir_save):
     now = datetime.datetime.now()
     filename = now.strftime('%Y-%m-%d_%H-%M-%S')
 
-    x0 = min(p0[0], p1[0])
-    y0 = min(p0[1], p1[1])
-    x1 = max(p0[0], p1[0])
-    y1 = max(p0[1], p1[1])
+    x0 = min(_p0[0], _p1[0])
+    y0 = min(_p0[1], _p1[1])
+    x1 = max(_p0[0], _p1[0])
+    y1 = max(_p0[1], _p1[1])
 
     img_boxed = img[y0:y1, x0:x1]
-    cv2.imwrite(os.path.join(dir_save, filename + '.png'), img_boxed)
+    cv2.imwrite(os.path.join(_dir_save, filename + '.png'), img_boxed)
 
     print('saved image x0:{0}, y0:{1}, x1:{2}, y1:{3}'.format(x0, y0, x1, y1))
 
