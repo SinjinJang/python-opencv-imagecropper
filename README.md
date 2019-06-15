@@ -5,7 +5,8 @@ Description
 -----------
 
 This is image cropping tool by mouse dragging action.
-I made this tool to gathering datasets for machine learning.
+And also there are simple tool which is to make image squared and same size.
+I made this tool for gathering datasets for machine learning.
 
 Run the image cropper
 ---------------------
