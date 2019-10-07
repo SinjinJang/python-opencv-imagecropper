@@ -88,14 +88,19 @@ def select_box(event, x, y, flags, param):
 def do_main(dir_in, dir_out):
     global img, p0, p1
 
-    files = [os.path.join(dir_in, file) for file in os.listdir(dir_in)
-             if os.path.isfile(os.path.join(dir_in, file))]
+    files = [os.path.join(dir_in, each) for each in os.listdir(dir_in)
+             if os.path.isfile(os.path.join(dir_in, each))]
+    files.sort()
 
-    for file in files:
-        img = cv2.imread(file, cv2.IMREAD_COLOR)
+    nums = len(files)
+    idx = 0
+
+    while nums > idx:
+        img = cv2.imread(files[idx], cv2.IMREAD_COLOR)
 
         # If the file is not image, then continue to next
         if img is None:
+            idx += 1
             continue
 
         # Shrink image if the image is too big to display on the screen
@@ -108,7 +113,7 @@ def do_main(dir_in, dir_out):
         # Show image
         cv2.imshow('image', img)
         cv2.setMouseCallback('image', select_box)
-        print('current image file: {}'.format(file))
+        print('[{}] {}'.format(idx, files[idx]))
 
         while True:
             k = cv2.waitKey(100) & 0xFF
@@ -124,6 +129,11 @@ def do_main(dir_in, dir_out):
                     p0 = p1 = None
             elif k == ord(' '):
                 # wait for ' ' key to load next image
+                idx += 1
+                break
+            elif k == ord('b'):
+                # wait for 'b' key to load previous image
+                idx -= 1
                 break
 
     cv2.destroyAllWindows()
