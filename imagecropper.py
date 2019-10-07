@@ -113,7 +113,7 @@ def do_main(dir_in, dir_out):
         # Show image
         cv2.imshow('image', img)
         cv2.setMouseCallback('image', select_box)
-        print('[{}] {}'.format(idx, files[idx]))
+        print('[{}/{}] {}'.format(idx+1, nums, files[idx]))
 
         while True:
             k = cv2.waitKey(100) & 0xFF
