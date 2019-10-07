@@ -108,6 +108,7 @@ def do_main(dir_in, dir_out):
         # Show image
         cv2.imshow('image', img)
         cv2.setMouseCallback('image', select_box)
+        print('current image file: {}'.format(file))
 
         while True:
             k = cv2.waitKey(100) & 0xFF
