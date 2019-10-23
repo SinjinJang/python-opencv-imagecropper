@@ -68,8 +68,8 @@ def save_box(_img, _p0, _p1, _dir_out):
     print('saved image x0:{0}, y0:{1}, x1:{2}, y1:{3}'.format(x0, y0, x1, y1))
 
 
-# mouse callback function
-def select_box(event, x, y, flags, param):
+# mouse callback function - by mouse dragging
+def drag_box(event, x, y, flags, param):
     global p0, p1, img
 
     if event == cv2.EVENT_LBUTTONDOWN:
@@ -112,7 +112,7 @@ def do_main(dir_in, dir_out):
 
         # Show image
         cv2.imshow('image', img)
-        cv2.setMouseCallback('image', select_box)
+        cv2.setMouseCallback('image', drag_box)
         print('[{}/{}] {}'.format(idx+1, nums, files[idx]))
 
         while True:
