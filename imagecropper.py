@@ -13,8 +13,10 @@ p1 = None
 opt_squared = False
 auto_box_size = 50
 
-# make a rectangle as squared
+
 def make_squared(_p0, _p1):
+    """ Make a rectangle as squared """
+
     # Nothing to do if two points are same.
     if _p0 == _p1:
         return _p0, _p1
@@ -34,8 +36,8 @@ def make_squared(_p0, _p1):
     return _p0, (p1_x, p1_y)
 
 
-# draw box which selected by mouse dragging
 def draw_box(_img, _p0, _p1):
+    """ Draw box which selected by mouse dragging """
     global opt_squared
 
     boxed = _img.copy()
@@ -47,8 +49,8 @@ def draw_box(_img, _p0, _p1):
     cv2.imshow('image', boxed)
 
 
-# Save the boxed area as an image
 def save_box(_img, _p0, _p1, _dir_out):
+    """ Save the boxed area as an image """
     global opt_squared
 
     now = datetime.datetime.now()
@@ -68,8 +70,8 @@ def save_box(_img, _p0, _p1, _dir_out):
     print('saved image x0:{0}, y0:{1}, x1:{2}, y1:{3}'.format(x0, y0, x1, y1))
 
 
-# mouse callback function - by mouse dragging
 def drag_box(event, x, y, flags, param):
+    """ Mouse callback function - by mouse dragging """
     global p0, p1, img
 
     if event == cv2.EVENT_LBUTTONDOWN:
@@ -86,6 +88,7 @@ def drag_box(event, x, y, flags, param):
 
 
 def auto_box(event, x, y, flags, param):
+    """ Mouse callback function - always draw box which resizable """
     global p0, p1, img, auto_box_size
 
     p0 = (x, y)
