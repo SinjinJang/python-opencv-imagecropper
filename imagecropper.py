@@ -95,7 +95,7 @@ def auto_box(event, x, y, flags, param):
 
 
 def do_main(dir_in, dir_out, is_auto_box_on):
-    global img, p0, p1, auto_box_size
+    global img, p0, p1, opt_squared, auto_box_size
 
     files = [os.path.join(dir_in, each) for each in os.listdir(dir_in)
              if os.path.isfile(os.path.join(dir_in, each))]
@@ -153,6 +153,9 @@ def do_main(dir_in, dir_out, is_auto_box_on):
                 if auto_box_size > 10:
                     auto_box_size -= 10
                 break
+            elif k == ord('t'):
+                # wait for 't' key to toggle squared box on/off
+                opt_squared = not opt_squared
 
     cv2.destroyAllWindows()
 
@@ -164,8 +167,6 @@ if __name__ == '__main__':
                         help='specify directory to load raw images')
     parser.add_argument('-o', '--output-directory', type=str, default='img-cropped',
                         help='specify directory to save cropped images')
-    parser.add_argument('-s', '--squared', action='store_true',
-                        help='to make cropped images as squared')
     parser.add_argument('-a', '--auto_box', action='store_true',
                         help='draw box for cropping image automatically')
     args = parser.parse_args()
@@ -175,8 +176,6 @@ if __name__ == '__main__':
         sys.exit('The input directory is not exist!!!')
     if not os.path.isdir(args.output_directory):
         os.mkdir(args.output_directory)
-
-    opt_squared = args.squared
 
     # run main job for image cropping
     do_main(args.input_directory, args.output_directory, args.auto_box)
