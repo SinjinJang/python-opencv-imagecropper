@@ -11,7 +11,7 @@ p0 = None
 p1 = None
 
 opt_squared = False
-
+auto_box_size = 50
 
 # make a rectangle as squared
 def make_squared(_p0, _p1):
@@ -85,8 +85,17 @@ def drag_box(event, x, y, flags, param):
         draw_box(img, p0, (x, y))
 
 
-def do_main(dir_in, dir_out):
-    global img, p0, p1
+def auto_box(event, x, y, flags, param):
+    global p0, p1, img, auto_box_size
+
+    p0 = (x, y)
+    p1 = (x + auto_box_size, y + auto_box_size)
+
+    draw_box(img, p0, p1)
+
+
+def do_main(dir_in, dir_out, is_auto_box_on):
+    global img, p0, p1, auto_box_size
 
     files = [os.path.join(dir_in, each) for each in os.listdir(dir_in)
              if os.path.isfile(os.path.join(dir_in, each))]
@@ -112,7 +121,7 @@ def do_main(dir_in, dir_out):
 
         # Show image
         cv2.imshow('image', img)
-        cv2.setMouseCallback('image', drag_box)
+        cv2.setMouseCallback('image', auto_box if is_auto_box_on else drag_box)
         print('[{}/{}] {}'.format(idx+1, nums, files[idx]))
 
         while True:
@@ -135,6 +144,15 @@ def do_main(dir_in, dir_out):
                 # wait for 'b' key to load previous image
                 idx -= 1
                 break
+            elif k == ord('f'):
+                # wait for 'f' key to increase auto box size
+                auto_box_size += 10
+                break
+            elif k == ord('d'):
+                # wait for 'd' key to decrease auto box size
+                if auto_box_size > 10:
+                    auto_box_size -= 10
+                break
 
     cv2.destroyAllWindows()
 
@@ -148,6 +166,8 @@ if __name__ == '__main__':
                         help='specify directory to save cropped images')
     parser.add_argument('-s', '--squared', action='store_true',
                         help='to make cropped images as squared')
+    parser.add_argument('-a', '--auto_box', action='store_true',
+                        help='draw box for cropping image automatically')
     args = parser.parse_args()
 
     # check and initialize
@@ -159,4 +179,4 @@ if __name__ == '__main__':
     opt_squared = args.squared
 
     # run main job for image cropping
-    do_main(args.input_directory, args.output_directory)
+    do_main(args.input_directory, args.output_directory, args.auto_box)
