@@ -31,7 +31,7 @@ def make_squared(_p0, _p1):
     else:
         p1_y = _p0[1] - long_side
 
-    return p0, (p1_x, p1_y)
+    return _p0, (p1_x, p1_y)
 
 
 # draw box which selected by mouse dragging
