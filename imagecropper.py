@@ -136,6 +136,13 @@ def do_main(dir_in, dir_out, is_auto_box_on):
                     save_box(img, p0, p1, dir_out)
                     cv2.imshow('image', img)
                     p0 = p1 = None
+            elif k == ord('d'):
+                # wait for 'd' key to decrease auto box size
+                if auto_box_size > 10:
+                    auto_box_size -= 10
+            elif k == ord('t'):
+                # wait for 't' key to toggle squared box on/off
+                opt_squared = not opt_squared
             elif k == ord(' '):
                 # wait for ' ' key to load next image
                 idx += 1
@@ -147,13 +154,6 @@ def do_main(dir_in, dir_out, is_auto_box_on):
             elif k == ord('f'):
                 # wait for 'f' key to increase auto box size
                 auto_box_size += 10
-            elif k == ord('d'):
-                # wait for 'd' key to decrease auto box size
-                if auto_box_size > 10:
-                    auto_box_size -= 10
-            elif k == ord('t'):
-                # wait for 't' key to toggle squared box on/off
-                opt_squared = not opt_squared
 
     cv2.destroyAllWindows()
 
