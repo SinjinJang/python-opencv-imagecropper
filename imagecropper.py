@@ -147,12 +147,10 @@ def do_main(dir_in, dir_out, is_auto_box_on):
             elif k == ord('f'):
                 # wait for 'f' key to increase auto box size
                 auto_box_size += 10
-                break
             elif k == ord('d'):
                 # wait for 'd' key to decrease auto box size
                 if auto_box_size > 10:
                     auto_box_size -= 10
-                break
             elif k == ord('t'):
                 # wait for 't' key to toggle squared box on/off
                 opt_squared = not opt_squared
