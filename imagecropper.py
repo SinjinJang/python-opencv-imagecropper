@@ -6,9 +6,11 @@ import sys
 import cv2
 
 
+img_org = None
 img = None
 p0 = None
 p1 = None
+resize_ratio = 1
 
 opt_squared = False
 auto_box_size = 50
@@ -51,7 +53,7 @@ def draw_box(_img, _p0, _p1):
 
 def save_box(_img, _p0, _p1, _dir_out):
     """ Save the boxed area as an image """
-    global opt_squared
+    global opt_squared, img_org
 
     now = datetime.datetime.now()
     filename = now.strftime('%Y-%m-%d_%H-%M-%S')
@@ -59,12 +61,12 @@ def save_box(_img, _p0, _p1, _dir_out):
     if opt_squared:
         _p0, _p1 = make_squared(_p0, _p1)
 
-    x0 = min(_p0[0], _p1[0])
-    y0 = min(_p0[1], _p1[1])
-    x1 = max(_p0[0], _p1[0])
-    y1 = max(_p0[1], _p1[1])
+    x0 = int(min(_p0[0], _p1[0]) // resize_ratio)
+    y0 = int(min(_p0[1], _p1[1]) // resize_ratio)
+    x1 = int(max(_p0[0], _p1[0]) // resize_ratio)
+    y1 = int(max(_p0[1], _p1[1]) // resize_ratio)
 
-    img_boxed = img[y0:y1, x0:x1]
+    img_boxed = img_org[y0:y1, x0:x1]
     cv2.imwrite(os.path.join(_dir_out, filename + '.png'), img_boxed)
 
     print('saved image x0:{0}, y0:{1}, x1:{2}, y1:{3}'.format(x0, y0, x1, y1))
@@ -98,7 +100,7 @@ def auto_box(event, x, y, flags, param):
 
 
 def do_main(dir_in, dir_out, is_auto_box_on):
-    global img, p0, p1, opt_squared, auto_box_size
+    global img_org, img, p0, p1, resize_ratio, opt_squared, auto_box_size
 
     files = [os.path.join(dir_in, each) for each in os.listdir(dir_in)
              if os.path.isfile(os.path.join(dir_in, each))]
@@ -108,18 +110,18 @@ def do_main(dir_in, dir_out, is_auto_box_on):
     idx = 0
 
     while nums > idx:
-        img = cv2.imread(files[idx], cv2.IMREAD_COLOR)
+        img_org = cv2.imread(files[idx], cv2.IMREAD_COLOR)
 
         # If the file is not image, then continue to next
-        if img is None:
+        if img_org is None:
             idx += 1
             continue
 
         # Shrink image if the image is too big to display on the screen
-        height = img.shape[0]
+        height = img_org.shape[0]
         if height > 1000:
-            ratio = (1000 / height) - 0.1
-            img = cv2.resize(img, dsize=(0, 0), fx=ratio, fy=ratio,
+            resize_ratio = (1000 / height) - 0.1
+            img = cv2.resize(img_org, dsize=(0, 0), fx=resize_ratio, fy=resize_ratio,
                              interpolation=cv2.INTER_AREA)
 
         # Show image
